@@ -1,0 +1,7 @@
+{
+  "plugin": "enable",
+  "disableReason": "",
+    "commands": {
+    "#ping": "指令用法:\n#ping [网站]"
+  }
+}

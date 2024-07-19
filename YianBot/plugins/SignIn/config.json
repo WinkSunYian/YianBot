@@ -1,0 +1,7 @@
+{
+  "plugin": "enable",
+  "disableReason": "",
+  "commands": {
+    "签到": "指令用法:\n签到"
+  }
+}
