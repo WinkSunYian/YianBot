@@ -1,5 +1,5 @@
 ﻿{
-  "plugin": "enable",
+  "plugin": "disable",
   "disableReason": "有封号风险,已停用",
   "commands": {
     "#AI绘画": "指令用法:\n#AI绘画 [要素]\n指令别名:\n#绘画"

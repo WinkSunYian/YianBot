@@ -9,7 +9,7 @@ from nonebot.params import (
     CommandArg
 )
 from utils.utils import get_message_at
-from configs.configs import MASTER
+from YianBot.configs.Config import MASTER
 from random import choice
 
 __plugin_name__ = 'EvaluateIt'

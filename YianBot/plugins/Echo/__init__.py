@@ -5,7 +5,7 @@ from nonebot.adapters.onebot.v11 import (
     Message,
 )
 from nonebot.params import CommandArg
-from configs.configs import MASTER
+from YianBot.configs.Config import MASTER
 
 __plugin_name__ = 'ChatAI'
 __plugin_usage__ = 'Echo'

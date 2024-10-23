@@ -5,7 +5,7 @@ from nonebot.adapters.onebot.v11 import (
     GroupRequestEvent
 )
 from utils.utils import DailyCountLimiter
-from configs.configs import MASTER
+from YianBot.configs.Config import MASTER
 import asyncio
 from random import randint
 

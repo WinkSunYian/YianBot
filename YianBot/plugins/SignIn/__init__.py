@@ -18,6 +18,7 @@ from random import choice
 reward = {
     "软糖": [i for i in range(1, 10)],
     "小熊饼干": [0 for i in range(0, 5)] + [1],
+    "软妹币": [i for i in range(0, 50)],
 }
 
 count = DailyCountLimiter(1)

@@ -1,6 +1,6 @@
 from requests import get
 import json
-from configs.configs import NICKNAME
+from YianBot.configs.Config import NICKNAME
 
 config = {
     "lanlanhz": {

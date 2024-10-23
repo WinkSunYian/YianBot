@@ -2,6 +2,6 @@
   "plugin": "enable",
   "disableReason": "",
   "commands": {
-    "#发牌": "指令用法:\n#发牌 [数量]"
+    "Test": "指令用法:\n#test"
   }
 }

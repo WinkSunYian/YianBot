@@ -1,4 +1,7 @@
 .idea/
+.git/
+.gitignore
+.venv/
 .vscode/
 __pycache__/
 build/

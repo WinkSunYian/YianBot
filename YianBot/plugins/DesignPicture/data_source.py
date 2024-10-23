@@ -37,7 +37,7 @@ async def get_tietie_link(user_id) -> str:
 
 async def get_ding_link(user_id) -> str:
     # 顶
-    url = f"https://api.andeer.top/API/gif_ding.php?qq={user_id}"
+    url = f"https://api.xingzhige.com/API/dingqiu/?qq={user_id}"
     return url
 
 

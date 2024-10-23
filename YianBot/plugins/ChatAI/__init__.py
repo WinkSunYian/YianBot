@@ -7,10 +7,10 @@ from nonebot.adapters.onebot.v11 import (
 from .data_source import (
     getChat,
 )
-from utils.utils import BanCheckLimiter, DialogueControl
+from utils.utils import BanCheckLimiter
 
-__plugin_name__ = 'ChatAI'
-__plugin_usage__ = '聊天AI'
+__plugin_name__ = "ChatAI"
+__plugin_usage__ = "聊天AI"
 
 banCheckLimiter = BanCheckLimiter()
 
@@ -28,17 +28,9 @@ async def chat_handle(event: MessageEvent):
         await chat.finish("恶意请求")
     banCheckLimiter.add(event.user_id)
 
-    msg = await getChat(event.message.extract_plain_text(), at=at, user_id=event.user_id)
+    msg = await getChat(
+        event.message.extract_plain_text(), at=at, user_id=event.user_id
+    )
 
     if msg:  # 如果消息不为空
         await chat.finish(msg)
-
-
-delete = on_command("#清除对话", aliases={"#清除"}, priority=5, block=True)
-
-
-@delete.handle()
-async def _(event: MessageEvent):
-    dialogue = DialogueControl(event.user_id)
-    dialogue.delete()
-    await chat.finish(MessageSegment.reply(event.message_id) + "已清除对话")
