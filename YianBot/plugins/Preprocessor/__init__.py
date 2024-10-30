@@ -9,7 +9,7 @@ from nonebot.adapters.onebot.v11 import (
     MessageSegment,
 )
 from utils.utils import ConfigReader
-from .data_source import get_user_tag_or_register, is_tag_present
+from .data_source import get_user_tags, is_tag_present
 
 
 @event_preprocessor

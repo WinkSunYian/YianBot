@@ -1,4 +1,4 @@
-from YianBot.configs.Config import NICKNAME
+from configs.Config import NICKNAME
 from utils.http_utils import Aiohttp
 import re
 from random import choice
