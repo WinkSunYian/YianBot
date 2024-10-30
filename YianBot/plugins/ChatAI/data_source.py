@@ -1,5 +1,5 @@
 from configs.Config import NICKNAME
-from utils.http_utils import Aiohttp
+from utils.http_utils import http_client
 import re
 from random import choice
 
@@ -39,15 +39,6 @@ async def getDictionaryChat(inputText, at=False):
 
 
 async def getChatGPT(inputText, user_id):
-    url = f"http://bot.sunyian.cloud/api/ai_chat/qq/{user_id}"
-    headers = {"app-key": "QMCjya2bw60Fh4BMDshA5iQbcZI3l3GM"}
     data = {"message": inputText}
-    response = await Aiohttp(
-        url,
-        method="PUT",
-        headers=headers,
-        json=data,
-        verify=True,
-        timeout=10,
-    )   
-    return response["message"]
+    status, response = await http_client.post(f"/api/ai_chat/qq/{user_id}", json=data)
+    return response["reply"]
