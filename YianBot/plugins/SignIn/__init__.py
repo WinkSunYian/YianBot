@@ -10,7 +10,6 @@ from utils.utils import (
     DailyCountLimiter,
     BackpackControl
 )
-from utils.db_utils import UserBackpackManager
 
 from random import choice
 

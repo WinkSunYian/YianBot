@@ -17,5 +17,4 @@ luck = on_notice(priority=10)
 async def fun(bot: Bot, event: LuckyKingNotifyEvent):
     atmsg = MessageSegment.at(event.target_id)
     msg = "运气王:" + atmsg
-    print(msg)
     await luck.finish(msg)

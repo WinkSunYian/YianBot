@@ -10,7 +10,7 @@ from nonebot.params import CommandArg
 import time
 import os
 from utils.utils import args_split, ConfigReader
-from YianBot.configs.Config import MASTER
+from configs.Config import MASTER
 from utils.http_utils import Aiohttp
 import json
 
