@@ -79,6 +79,6 @@ class HTTPClient:
 
 
 http_client = HTTPClient(
-    base_url="http://sunyian.cloud/api/",
+    base_url="http://bot.sunyian.cloud/api",
     headers={"app-key": "QMCjya2bw60Fh4BMDshA5iQbcZI3l3GM"},
 )
