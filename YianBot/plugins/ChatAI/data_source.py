@@ -40,7 +40,5 @@ async def getDictionaryChat(inputText, at=False):
 
 async def getChatGPT(inputText, user_id):
     data = {"message": inputText}
-    status, response = await http_client.post(
-        f"/api/users/{user_id}/ai-chat", json=data
-    )
+    status, response = await http_client.post(f"/users/{user_id}/ai-chat", json=data)
     return response["data"]
