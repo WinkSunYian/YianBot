@@ -43,4 +43,4 @@ async def getChatGPT(inputText, user_id):
     status, response = await http_client.post(
         f"/api/users/{user_id}/ai-chat", json=data
     )
-    return response["reply"]
+    return response["data"]

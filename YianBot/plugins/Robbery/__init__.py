@@ -14,7 +14,6 @@ from utils.utils import (
     DailyCountLimiter,
     BackpackControl
 )
-from utils.db_utils import UserBackpackManager
 from utils.utils import FreqLimiter, args_split
 from random import choice
 from .data_source import play

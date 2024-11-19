@@ -82,3 +82,22 @@ http_client = HTTPClient(
     base_url="http://bot.sunyian.cloud/api",
     headers={"app-key": "QMCjya2bw60Fh4BMDshA5iQbcZI3l3GM"},
 )
+
+
+async def getChatGPT(inputText, user_id):
+    data = {"message": inputText}
+    status, response = await http_client.post(f"/users/{user_id}/ai-chat", data=data)
+    print(status, response)
+    return response["data"]
+
+
+if __name__ == "__main__":
+    import asyncio
+
+    async def main():
+        inputText = "你好"
+        user_id = "7345222"
+        response = await getChatGPT(inputText, user_id)
+        print(response)
+
+    asyncio.run(main())
