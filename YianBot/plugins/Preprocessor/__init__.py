@@ -21,7 +21,7 @@ async def _(bot: Bot, event: PrivateMessageEvent):
         count.increase(event.user_id)
         await bot.send(
             event=event,
-            message="广告内容",
+            message="王者荣耀柯南怪盗基德 9折Q币 详细加我好友 广告来自QQ机器人开发者 此号未回复 请联系Q7345222",
         )
 
 
