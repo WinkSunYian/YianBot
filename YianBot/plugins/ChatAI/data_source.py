@@ -41,4 +41,8 @@ async def getDictionaryChat(inputText, at=False):
 async def getChatGPT(inputText, user_id):
     data = {"message": inputText}
     status, response = await http_client.post(f"/users/{user_id}/ai-chat", json=data)
-    return response["data"]
+    response_data = response["data"]
+    last_newline = response_data.rfind("\n")
+    if last_newline != -1:
+        response_data = response_data[:last_newline]
+    return response_data

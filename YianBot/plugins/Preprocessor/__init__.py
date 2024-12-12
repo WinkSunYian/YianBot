@@ -15,14 +15,14 @@ from .data_source import get_user_tags, is_tag_present, get_user_tags_or_create
 count = DailyCountLimiter(1)
 
 
-@event_preprocessor
-async def _(bot: Bot, event: PrivateMessageEvent):
-    if count.check(event.user_id):
-        count.increase(event.user_id)
-        await bot.send(
-            event=event,
-            message="王者荣耀柯南怪盗基德 9折Q币 详细加我好友 广告来自QQ机器人开发者 此号未回复 请联系Q7345222",
-        )
+# @event_preprocessor
+# async def _(bot: Bot, event: PrivateMessageEvent):
+#     if count.check(event.user_id):
+#         count.increase(event.user_id)
+#         await bot.send(
+#             event=event,
+#             message="王者荣耀柯南怪盗基德 9折Q币 详细加我好友 广告来自QQ机器人开发者 此号未回复 请联系Q7345222",
+#         )
 
 
 @event_preprocessor
