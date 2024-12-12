@@ -1,14 +1,14 @@
 import time
-from random import randint
+import hashlib
 
 
 def get_luck(user_id):
     data = time.localtime(time.time())[0:3]
-    luck = user_id // data[2]
-    luck = luck % data[0]
-    luck = (luck * data[1]) // 10
-    luck = luck % 101
-
+    combined_string = f"{data}{user_id}"
+    hash_object = hashlib.sha256(combined_string.encode())
+    hash_value = int(hash_object.hexdigest(), 16)  
+    luck = hash_value % 101 
+    
     if luck == 0:
         msg = f"您今天的幸运指数为:{luck}\n{'找个地埋了吧'}"
     elif luck < 10:
