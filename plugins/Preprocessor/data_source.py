@@ -3,7 +3,7 @@ from utils.http_utils import http_client
 
 async def get_user_tags_or_create(user_id: int) -> list:
     status, response = await http_client.get(f"/users/{user_id}/tags")
-    if response["code"] == 2:
+    if response["code"] == 5004:
         status, response = await http_client.post(f"/users/{user_id}")
 
 
