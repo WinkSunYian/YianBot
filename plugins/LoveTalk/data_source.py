@@ -1,5 +1,4 @@
 import aiohttp
-import requests
 
 
 async def get_love_talk():

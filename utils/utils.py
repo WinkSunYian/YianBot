@@ -12,8 +12,7 @@ import time
 import json
 import os
 import re
-
-scheduler = require("nonebot_plugin_apscheduler").scheduler
+# scheduler = require("nonebot_plugin_apscheduler").scheduler
 
 
 class CountLimiter:

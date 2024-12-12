@@ -9,7 +9,7 @@ from nonebot.adapters.onebot.v11 import (
 )
 from nonebot.params import CommandArg
 from utils.utils import args_split
-from YianBot.configs.Config import MASTER, NICKNAME
+from configs.Config import MASTER, NICKNAME
 
 __plugin_name__ = 'GroupManagement'
 __plugin_usage__ = '群管'

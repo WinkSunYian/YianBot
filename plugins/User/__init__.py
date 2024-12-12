@@ -4,7 +4,7 @@ from nonebot.params import CommandArg
 from utils.utils import BackpackControl, args_split
 
 from utils.utils import FreqLimiter
-from YianBot.configs.Config import MASTER
+from configs.Config import MASTER
 from .data_source import construct
 
 __plugin_name__ = "User"
