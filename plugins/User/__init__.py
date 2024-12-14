@@ -1,11 +1,10 @@
 from nonebot import on_command
 from nonebot.adapters.onebot.v11 import Bot, MessageEvent, Message, MessageSegment
 from nonebot.params import CommandArg
-from utils.utils import BackpackControl, args_split
+from utils.utils import args_split
 from utils.utils import FreqLimiter
 from utils.http_utils import http_client
 from configs.Config import MASTER
-from .data_source import construct
 
 __plugin_name__ = "User"
 __plugin_usage__ = "用户"
