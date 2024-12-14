@@ -1,13 +1,11 @@
-from nonebot import on_fullmatch
+from nonebot import on_command
 from nonebot.adapters.onebot.v11 import (
-    Bot,
     GroupMessageEvent,
     MessageSegment,
-    PrivateMessageEvent,
 )
 from utils.http_utils import http_client
 
-signin = on_fullmatch("签到", priority=6, block=True)
+signin = on_command("#签到", priority=6, block=True)
 
 
 @signin.handle()
