@@ -17,19 +17,8 @@ mypack = on_command("#背包", priority=5, block=True)
 
 @mypack.handle()
 async def mypack_handle(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
-    if event.user_id == MASTER:
-        args_list = args_split(args, 1)
-        if len(args_list) == 0:
-            args_list.append(event.user_id)
-        backpack = UserBackpackManager(args_list[0])
-        await mypack.finish(
-            MessageSegment.reply(event.message_id) + construct(backpack)
-        )
-    else:
-        backpack = UserBackpackManager(event.user_id)
-        await mypack.finish(
-            MessageSegment.reply(event.message_id) + construct(backpack)
-        )
+    args_list = args_split(args, 1)
+    await mypack.finish(args_list)
 
 
 transfer = on_command("#转账", priority=5, block=True)

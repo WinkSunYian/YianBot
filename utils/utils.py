@@ -12,6 +12,7 @@ import time
 import json
 import os
 import re
+
 # scheduler = require("nonebot_plugin_apscheduler").scheduler
 
 
@@ -100,8 +101,8 @@ class BanCheckLimiter:
             self.mint[key] = 0
             return False
         if (
-                self.mint[key] >= self.default_count
-                and time.time() - self.mtime[key] < self.default_check_time
+            self.mint[key] >= self.default_count
+            and time.time() - self.mtime[key] < self.default_check_time
         ):
             self.mtime[key] = time.time()
             self.mint[key] = 0
@@ -182,7 +183,7 @@ class DialogueControl:
     def __init__(self, user_id):
         self.user_dialogue = self.dialogue_path.format(user_id)
         if not os.path.exists(self.user_dialogue):
-            with open(self.user_dialogue, 'w', encoding='utf-8-sig') as fp:
+            with open(self.user_dialogue, "w", encoding="utf-8-sig") as fp:
                 json.dump([], fp)
         self.read_dialogue()
 
@@ -192,28 +193,24 @@ class DialogueControl:
     def add(self, user, assistant):
         self.check_last_used_time()  # 检查最后使用时间并清空对话记录
 
-        self.data.append(
-            {"role": "user", "content": user}
-        )
-        self.data.append(
-            {"role": "assistant", "content": assistant}
-        )
+        self.data.append({"role": "user", "content": user})
+        self.data.append({"role": "assistant", "content": assistant})
         if len(self.data) / 2 > 5:
             self.data.pop(0)
             self.data.pop(0)
 
-        with open(self.user_dialogue, "w", encoding='utf-8-sig') as fp:
+        with open(self.user_dialogue, "w", encoding="utf-8-sig") as fp:
             json.dump(self.data, fp, ensure_ascii=False)
 
             # 更新用户最后一次使用类的时间
         self.last_used_time = time.time()
 
     def delete(self):
-        with open(self.user_dialogue, "w", encoding='utf-8-sig') as fp:
+        with open(self.user_dialogue, "w", encoding="utf-8-sig") as fp:
             fp.write("[]")
 
     def read_dialogue(self):
-        with open(self.user_dialogue, encoding='utf-8-sig') as fp:
+        with open(self.user_dialogue, encoding="utf-8-sig") as fp:
             self.data = json.load(fp)
 
     def check_last_used_time(self):
@@ -233,6 +230,7 @@ class ConfigReader:
     配置读取工具
     :param path: 配置地址
     """
+
     data: json
 
     def __init__(self, path):
@@ -246,11 +244,11 @@ class ConfigReader:
     def read_config(self):
         if self.mtime != self.get_mtime():
             self.mtime = self.get_mtime()
-            with open(self.config_path, encoding='utf-8-sig') as fp:
+            with open(self.config_path, encoding="utf-8-sig") as fp:
                 self.data = json.load(fp)
 
     def save_config(self):
-        with open(self.config_path, "w", encoding='utf-8-sig') as fp:
+        with open(self.config_path, "w", encoding="utf-8-sig") as fp:
             json.dump(self.data, fp, ensure_ascii=False)
 
     def __getitem__(self, key):
@@ -288,21 +286,21 @@ class BackpackControl:
     def __init__(self, user_id):
         self.user_backpack = self.backpack_path.format(user_id)
         if not os.path.exists(self.user_backpack):
-            with open(self.user_backpack, 'w', encoding='utf-8-sig') as fp:
+            with open(self.user_backpack, "w", encoding="utf-8-sig") as fp:
                 json.dump([], fp)
         self.read_backpack()
         self.read_relational()
 
     def save(self):
-        with open(self.user_backpack, "w", encoding='utf-8-sig') as fp:
+        with open(self.user_backpack, "w", encoding="utf-8-sig") as fp:
             json.dump(self.data, fp, ensure_ascii=False)
 
     def read_backpack(self):
-        with open(self.user_backpack, encoding='utf-8-sig') as fp:
+        with open(self.user_backpack, encoding="utf-8-sig") as fp:
             self.data = json.load(fp)
 
     def read_relational(self):
-        with open(self.backpack_path.format(0), encoding='utf-8-sig') as fp:
+        with open(self.backpack_path.format(0), encoding="utf-8-sig") as fp:
             self.relational = json.load(fp)
 
     def use_item(self, key: str, number: int) -> int:
@@ -336,26 +334,21 @@ class BackpackControl:
 
         for item in self.data:
             if key == item["id"]:
-                return item['value']
+                return item["value"]
         return 0
 
     def __setitem__(self, key, value):
         key = self.query_id(key)
 
         for i in range(len(self.data)):
-            if key == self.data[i]['id']:
+            if key == self.data[i]["id"]:
                 if value == 0:
                     del self.data[i]
                 else:
-                    self.data[i]['value'] = value
+                    self.data[i]["value"] = value
                 break
         else:
-            self.data.append(
-                {
-                    "id": self.query_id(key),
-                    "value": value
-                }
-            )
+            self.data.append({"id": self.query_id(key), "value": value})
             # 根据ID排序
             self.data = sorted(self.data, key=lambda x: x["id"])
         # 保存背包
