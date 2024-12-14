@@ -2,8 +2,8 @@ from nonebot import on_command
 from nonebot.adapters.onebot.v11 import Bot, MessageEvent, Message, MessageSegment
 from nonebot.params import CommandArg
 from utils.utils import BackpackControl, args_split
-
 from utils.utils import FreqLimiter
+from utils.http_utils import http_client
 from configs.Config import MASTER
 from .data_source import construct
 
@@ -12,13 +12,28 @@ __plugin_usage__ = "用户"
 
 cd = FreqLimiter(60)
 
+
+def beautify_data(item_list):
+    msg = "┏" + "━" * 10 + "\n"
+    for item in item_list:
+        msg += f"┃ {item['name']} x {item['quantity']}\n"
+    else:
+        msg += "┃ 空空如也\n"
+    msg += "┗" + "━" * 10
+    return msg
+
+
 mypack = on_command("#背包", priority=5, block=True)
 
 
 @mypack.handle()
 async def mypack_handle(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
     args_list = args_split(args, 1)
-    await mypack.finish(args_list)
+    status, response = await http_client.put(f"/api/users/{event.user_id}/items")
+    item_list = response["data"]
+    await mypack.finish(
+        MessageSegment.reply(event.message_id) + beautify_data(item_list)
+    )
 
 
 transfer = on_command("#转账", priority=5, block=True)
