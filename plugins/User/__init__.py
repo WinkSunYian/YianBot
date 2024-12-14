@@ -28,10 +28,9 @@ mypack = on_command("#背包", priority=5, block=True)
 @mypack.handle()
 async def mypack_handle(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
     args_list = args_split(args, 1)
-    status, response = await http_client.put(f"/api/users/{event.user_id}/items")
-    item_list = response["data"]
+    status, response = await http_client.get(f"/users/{event.user_id}/items")
     await mypack.finish(
-        MessageSegment.reply(event.message_id) + beautify_data(item_list)
+        MessageSegment.reply(event.message_id) + beautify_data(response["data"])
     )
 
 

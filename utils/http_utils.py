@@ -85,8 +85,8 @@ http_client = HTTPClient(
 
 
 async def getChatGPT(inputText, user_id):
-    data = {"message": inputText}
-    status, response = await http_client.post(f"/users/{user_id}/ai-chat", json=data)
+    status, response = await http_client.put(f"/users/{7345222}/items")
+    print(response)
     return response["data"]
 
 
