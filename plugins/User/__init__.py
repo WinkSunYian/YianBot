@@ -13,12 +13,13 @@ cd = FreqLimiter(60)
 
 
 def beautify_data(item_list):
-    msg = "┏" + "━" * 10 + "\n"
+    if len(item_list) == 0:
+        return "╔" + "═" * 10 + "\n╠ 空空如也\n" + "╚" + "═" * 10
+
+    msg = "╔" + "═" * 10 + "\n"
     for item in item_list:
-        msg += f"┃ {item['name']} x {item['quantity']}\n"
-    else:
-        msg += "┃ 空空如也\n"
-    msg += "┗" + "━" * 10
+        msg += f"╠ {item['name']} x {item['quantity']}\n"
+    msg += "╚" + "═" * 10
     return msg
 
 
