@@ -5,7 +5,7 @@ from nonebot.adapters.onebot.v11 import (
 )
 from utils.http_utils import http_client
 
-signin = on_command("#签到", priority=6, block=True)
+signin = on_command("#签到", aliases={"签到"}, priority=6, block=True)
 
 
 @signin.handle()
