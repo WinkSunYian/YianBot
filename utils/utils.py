@@ -609,24 +609,25 @@ def insertionBlanks(matched):
 def args_split(args: Union[str, Message], args_count: int = -1) -> list:
     """
     说明:
-        分割参数
+        分割参数，支持处理 CQ 消息段。
     参数:
-        :param args: 带解析的参数
+        :param args: 带解析的参数，可以是 MessageSegment 或普通字符串
         :param args_count: 解析的参数数量
     返回:
         :return list
     """
+    args_list = []
     if isinstance(args, Message):
-        args = str(args)
-    args = args.replace("[CQ:at,qq=", " ").replace(",", " ")
-    args = re.sub("[\u4e00-\u9fa5][\d]|[\d][\u4e00-\u9fa5]", insertionBlanks, args)
-    if args_count == -1:
-        args_list = args.split()
-    else:
-        args_list = args.split(maxsplit=args_count - 1)
-    for i in range(len(args_list)):
-        if is_number(args_list[i]):
-            args_list[i] = eval(args_list[i])
+        for i in args:
+            if i.type == "at":
+                args_list.append(int(i.data["qq"]))
+            elif i.type == "text":
+                text = re.sub(
+                    "[\u4e00-\u9fa5][\d]|[\d][\u4e00-\u9fa5]",
+                    insertionBlanks,
+                    i.data["text"],
+                )
+                args_list += text.split()
     return args_list
 
 
