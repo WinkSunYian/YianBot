@@ -84,8 +84,10 @@ http_client = HTTPClient(
 )
 
 
-async def getChatGPT(inputText, user_id):
-    status, response = await http_client.put(f"/users/{7345222}/items")
+async def TEST(user_id, q):
+    status, response = await http_client.post(
+        f"/users/{user_id}/robbery", json={"target_id": q}
+    )
     print(response)
     return response["data"]
 
@@ -94,9 +96,9 @@ if __name__ == "__main__":
     import asyncio
 
     async def main():
-        inputText = "你好"
-        user_id = "7345222"
-        response = await getChatGPT(inputText, user_id)
+        inputText = "7345222"
+        user_id = "3239957605"
+        response = await TEST(inputText, user_id)
         print(response)
 
     asyncio.run(main())

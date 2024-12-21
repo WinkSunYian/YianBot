@@ -41,6 +41,7 @@ async def _(event: MessageEvent, args: Message = CommandArg()):
     else:
         if cd.check(event.user_id):
             cd.start_cd(event.user_id)
+            print(event.user_id, args_list)
             status, response = await http_client.post(
                 f"/users/{event.user_id}/robbery", json={"target_id": args_list[0]}
             )

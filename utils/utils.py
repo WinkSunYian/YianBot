@@ -620,7 +620,7 @@ def args_split(args: Union[str, Message], args_count: int = -1) -> list:
     if isinstance(args, Message):
         for i in args:
             if i.type == "at":
-                args_list.append(int(i.data["qq"]))
+                args_list.append(i.data["qq"])
             elif i.type == "text":
                 text = re.sub(
                     "[\u4e00-\u9fa5][\d]|[\d][\u4e00-\u9fa5]",
@@ -628,6 +628,9 @@ def args_split(args: Union[str, Message], args_count: int = -1) -> list:
                     i.data["text"],
                 )
                 args_list += text.split()
+    for i in range(len(args_list)):
+        args_list[i] = eval(args_list[i])
+
     return args_list
 
 
