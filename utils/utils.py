@@ -636,10 +636,9 @@ def args_split(args: Union[str, Message], maxsplit: int = 0) -> list:
         )
         args_list = text.split(maxsplit=maxsplit)  # 使用 maxsplit 参数
 
-    # 确保所有元素都是字符串
     for i in range(len(args_list)):
-        if isinstance(args_list[i], int):
-            args_list[i] = str(args_list[i])
+        if is_number(args_list[i]):
+            args_list[i] = int(args_list[i])
 
     return args_list
 

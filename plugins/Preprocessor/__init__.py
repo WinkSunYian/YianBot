@@ -17,10 +17,7 @@ count = DailyCountLimiter(1)
 
 @event_preprocessor
 async def _(event: MessageEvent):
-    if event.is_tome():
-        tag_list = await get_user_tags_or_create(event.user_id)
-        # if is_tag_present(tag_list, "banned"):
-        # raise IgnoredException("黑名单用户")
+    tag_list = await get_user_tags_or_create(event.user_id)
 
 
 @run_preprocessor
