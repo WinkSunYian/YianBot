@@ -45,6 +45,7 @@ async def _(event: MessageEvent, args: Message = CommandArg()):
             status, response = await http_client.post(
                 f"/users/{event.user_id}/robbery", json={"target_id": args_list[0]}
             )
+            print(status, response)
             await robbery.finish(
                 MessageSegment.reply(event.message_id) + response["msg"]
             )
