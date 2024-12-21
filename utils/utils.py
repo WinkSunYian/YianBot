@@ -606,13 +606,12 @@ def insertionBlanks(matched):
     return " ".join(matched.group())
 
 
-def args_split(args: Union[str, Message], args_count: int = -1) -> list:
+def args_split(args: Union[str, Message]) -> list:
     """
     说明:
         分割参数，支持处理 CQ 消息段。
     参数:
         :param args: 带解析的参数，可以是 MessageSegment 或普通字符串
-        :param args_count: 解析的参数数量
     返回:
         :return list
     """
@@ -628,8 +627,16 @@ def args_split(args: Union[str, Message], args_count: int = -1) -> list:
                     i.data["text"],
                 )
                 args_list += text.split()
+    else:
+        text = re.sub(
+            "[\u4e00-\u9fa5][\d]|[\d][\u4e00-\u9fa5]",
+            insertionBlanks,
+            args,
+        )
+        args_list = text.split()
     for i in range(len(args_list)):
-        args_list[i] = eval(args_list[i])
+        if isinstance(args_list[i], int):
+            args_list[i] = str(args_list[i])
 
     return args_list
 
