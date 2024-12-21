@@ -20,9 +20,7 @@ robbery = on_command("打劫", aliases={"抢劫"}, priority=6, block=True)
 
 @robbery.handle()
 async def _(event: MessageEvent, args: Message = CommandArg()):
-    print(args)
     args_list = args_split(args, 1)
-    print(args_list)
     """
     args_list[0] : QQ
     """
@@ -45,7 +43,6 @@ async def _(event: MessageEvent, args: Message = CommandArg()):
             status, response = await http_client.post(
                 f"/users/{event.user_id}/robbery", json={"target_id": str(args_list[0])}
             )
-            print(status, response)
             await robbery.finish(
                 MessageSegment.reply(event.message_id) + response["msg"]
             )
