@@ -618,7 +618,7 @@ def args_split(args: Union[str, Message], args_count: int = -1) -> list:
     """
     if isinstance(args, Message):
         args = str(args)
-    args = args.replace("[CQ:at,qq=", " ").replace("]", " ")
+    args = args.replace("[CQ:at,qq=", " ").replace(",", " ")
     args = re.sub("[\u4e00-\u9fa5][\d]|[\d][\u4e00-\u9fa5]", insertionBlanks, args)
     if args_count == -1:
         args_list = args.split()
