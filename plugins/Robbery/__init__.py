@@ -20,6 +20,7 @@ robbery = on_command("打劫", aliases={"抢劫"}, priority=6, block=True)
 
 @robbery.handle()
 async def _(event: MessageEvent, args: Message = CommandArg()):
+    print(args)
     args_list = args_split(args, 1)
     """
     args_list[0] : QQ
