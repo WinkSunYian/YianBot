@@ -8,6 +8,7 @@ from nonebot.adapters.onebot.v11 import (
     MessageEvent,
     MessageSegment,
     PrivateMessageEvent,
+    GroupMessageEvent,
 )
 from utils.utils import ConfigReader, DailyCountLimiter
 from .data_source import get_user_tags, is_tag_present, get_user_tags_or_create
@@ -15,16 +16,11 @@ from .data_source import get_user_tags, is_tag_present, get_user_tags_or_create
 count = DailyCountLimiter(1)
 
 
-# @event_preprocessor
-# async def _(event: MessageEvent):
-#     if event.is_tome():
-#         tag_list = await get_user_tags_or_create(event.user_id)
-
-
-@run_preprocessor
-async def _(bot: Bot, event: MessageEvent, matcher: Matcher):
+@event_preprocessor
+async def _(event: GroupMessageEvent):
     if event.is_tome():
-        print("run_preprocessor")
+        print("1")
+        tag_list = await get_user_tags_or_create(event.user_id)
 
 
 # @run_preprocessor
