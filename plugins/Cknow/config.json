@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-  "commands": {
-    "#Cknow": "指令用法:\n#Cknow [问题]\n指令别名:\n#cn"
-  }
-}
