@@ -80,16 +80,14 @@ class HTTPClient:
 
 http_client = HTTPClient(
     base_url="http://bot.sunyian.cloud/api",
+    # base_url="http://127.0.0.1:80/yianbot/api",
     headers={"app-key": "QMCjya2bw60Fh4BMDshA5iQbcZI3l3GM"},
 )
 
 
 async def TEST(user_id, q):
-    status, response = await http_client.post(
-        f"/users/{user_id}/robbery", json={"target_id": q}
-    )
+    status, response = await http_client.put(f"/users/{user_id}/sign-in")
     print(response)
-    return response["data"]
 
 
 if __name__ == "__main__":
@@ -97,8 +95,7 @@ if __name__ == "__main__":
 
     async def main():
         inputText = "7345222"
-        user_id = "3239957605"
+        user_id = "7345222"
         response = await TEST(inputText, user_id)
-        print(response)
 
     asyncio.run(main())
