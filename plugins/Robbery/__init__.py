@@ -7,11 +7,12 @@ from nonebot.adapters.onebot.v11 import (
     MessageEvent,
     PrivateMessageEvent,
 )
-from nonebot.params import CommandArg
+from nonebot.params import CommandArg, Depends
 from random import choice
 from utils.utils import DailyCountLimiter, BackpackControl
 from utils.utils import FreqLimiter, args_split
 from utils.http_utils import http_client
+from dependencies.get_user_tags import get_user_tags
 
 cd = FreqLimiter(60)
 
@@ -19,7 +20,11 @@ robbery = on_command("打劫", aliases={"抢劫"}, priority=6, block=True)
 
 
 @robbery.handle()
-async def _(event: MessageEvent, args: Message = CommandArg()):
+async def _(
+    event: MessageEvent,
+    args: Message = CommandArg(),
+    tags: list = Depends(get_user_tags),
+):
     args_list = args_split(args, 1)
     print(args_list)
     """
