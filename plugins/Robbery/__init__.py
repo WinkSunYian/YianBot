@@ -44,7 +44,6 @@ async def _(
     else:
         if cd.check(event.user_id):
             cd.start_cd(event.user_id)
-            print(event.user_id, args_list)
             status, response = await http_client.post(
                 f"/users/{event.user_id}/robbery", json={"target_id": str(args_list[0])}
             )
