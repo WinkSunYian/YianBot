@@ -38,6 +38,7 @@ group = on_request(priority=6, block=True)
 
 @group.handle()
 async def group_handle(bot: Bot, event: GroupRequestEvent):
+    print(event.sub_type)
     if event.sub_type == "invite":
         await bot.send_msg(
             message_type="private",
