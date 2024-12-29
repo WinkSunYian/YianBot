@@ -9,7 +9,7 @@ import json
 
 user_block_limiter = UserBlockLimiter()
 
-with open(".缺氧数据库.json", "r", encoding="utf-8") as f:
+with open("/data/缺氧数据库.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 qy = on_command("#缺氧", aliases={"缺氧"}, priority=5, block=True)
@@ -26,8 +26,11 @@ async def _(
     name = args_list[0]
     if name not in data:
         pass
-    if user_block_limiter.check(event.user_id):  # 检查是否在使用
+    if user_block_limiter.check(event.user_id):
         pass
 
-    path = await get_oxygen_card(name)
-    user_block_limiter.set_false(event.user_id)  # 使用完成
+    path = await get_oxygen_card(name, data[name])
+    with open(path, "rb") as f:
+        image_bytes = f.read()
+    user_block_limiter.set_false(event.user_id)
+    await qy.finish(MessageSegment.image(image_bytes))
