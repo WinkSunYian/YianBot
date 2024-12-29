@@ -12,7 +12,7 @@ user_block_limiter = UserBlockLimiter()
 with open("/data/YianBot/data/缺氧数据库.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-qy = on_command("#缺氧", aliases={"缺氧"}, priority=5, block=True)
+qy = on_command("#缺氧", aliases={"缺氧"}, priority=6, block=True)
 
 
 @qy.handle()
