@@ -15,5 +15,5 @@ signin = on_fullmatch("#test", priority=6, block=True)
 
 @signin.handle()
 async def _(event: GroupMessageEvent):
-    path = "data/oxygen_card/fieldset_screenshot.png"
+    path = "/data/oxygen_card/fieldset_screenshot.png"
     await signin.finish(MessageSegment.image(path))
