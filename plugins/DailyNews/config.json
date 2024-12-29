@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-  "commands": {
-    "#每日新闻": "指令用法:\n#每日新闻"
-  }
-}
