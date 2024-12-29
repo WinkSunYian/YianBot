@@ -20,4 +20,7 @@ async def _(event: GroupMessageEvent):
         print(f"文件不存在: {path}")
     else:
         print(f"文件存在: {path}")
-    await signin.finish(MessageSegment.image(str(path)))
+
+    with open(path, "rb") as f:
+        image_bytes = f.read()
+    await signin.finish(MessageSegment.image(image_bytes))
