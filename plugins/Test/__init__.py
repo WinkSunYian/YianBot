@@ -16,4 +16,8 @@ signin = on_fullmatch("#test", priority=6, block=True)
 @signin.handle()
 async def _(event: GroupMessageEvent):
     path = Path("/data/YianBot/data/oxygen_card/fieldset_screenshot.png")
+    if not path.exists():
+        print(f"文件不存在: {path}")
+    else:
+        print(f"文件存在: {path}")
     await signin.finish(MessageSegment.image(str(path)))
