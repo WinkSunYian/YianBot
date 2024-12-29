@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-  "commands": {
-    "Test": "指令用法:\n#test"
-  }
-}

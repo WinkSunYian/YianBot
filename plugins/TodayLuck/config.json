@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-  "commands": {
-    "今日运势": "指令用法:\n今日运势"
-  }
-}

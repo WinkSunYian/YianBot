@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-  "commands": {
-    "#情话": "指令用法:\n#情话"
-  }
-}

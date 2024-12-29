@@ -11,97 +11,9 @@ import time
 import os
 from utils.utils import args_split, ConfigReader
 from configs.Config import MASTER
-from utils.http_utils import Aiohttp
-import json
 
 __plugin_name__ = "Master"
 __plugin_usage__ = "主人功能"
-
-
-user_tags = on_command("#用户标签", priority=5, block=True)
-
-
-@user_tags.handle()
-async def tags_handle(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
-    if event.user_id == MASTER:
-        args_list = args_split(args)
-        if args_list[0] == "添加":
-            if len(args_list) < 3:
-                await user_tags.finish("缺少参数")
-            if len(args_list) < 4:
-                args_list.append("{}")
-            url = "http://api.sunyian.cloud/add-user-tag/"
-            headers = {"API-Key": "jix8ZqQlAle43JyjDqgpllmO7LOvwzEz"}
-            data = {
-                "qq_id": args_list[1],
-                "tag_name": args_list[2],
-                "extra_data": json.loads(args_list[3]),
-            }
-            response = await Aiohttp(
-                url,
-                method="POST",
-                headers=headers,
-                json=data,
-                verify=True,
-                timeout=10,
-            )
-            await user_tags.finish(response["message"])
-        elif args_list[0] == "删除":
-            url = "http://api.sunyian.cloud/remove-user-tag/"
-            headers = {"API-Key": "jix8ZqQlAle43JyjDqgpllmO7LOvwzEz"}
-            data = {"qq_id": args_list[1], "tag_name": args_list[2]}
-            response = await Aiohttp(
-                url,
-                method="POST",
-                headers=headers,
-                json=data,
-                verify=True,
-                timeout=10,
-            )
-            await user_tags.finish(response["message"])
-        elif args_list[0] == "查询":
-            url = "http://api.sunyian.cloud/list-user-tag/"
-            headers = {"API-Key": "jix8ZqQlAle43JyjDqgpllmO7LOvwzEz"}
-            data = {"qq_id": args_list[1]}
-            response = await Aiohttp(
-                url,
-                method="POST",
-                headers=headers,
-                json=data,
-                verify=True,
-                timeout=10,
-            )
-            if response["code"] == 0:
-                await user_tags.finish(response["message"])
-            tag_list = response["tag_list"]
-            if len(tag_list) == 0:
-                await user_tags.finish("该用户没有标签")
-            s = f"{args_list[1]}的标签："
-            for i in tag_list:
-                s += "\n"
-                s += i["tag_name"]
-                for j in i["extra_data"]:
-                    s += f"\n    {j}:{i['extra_data'][j]}"
-            await user_tags.finish(s)
-        elif args_list[0] == "修改":
-            url = "http://api.sunyian.cloud/update-user-tag/"
-            headers = {"API-Key": "jix8ZqQlAle43JyjDqgpllmO7LOvwzEz"}
-            data = {
-                "qq_id": args_list[1],
-                "tag_name": args_list[2],
-                "extra_data": json.loads(args_list[3]),
-            }
-            response = await Aiohttp(
-                url,
-                method="POST",
-                headers=headers,
-                json=data,
-                verify=True,
-                timeout=10,
-            )
-            if response["code"] == 0:
-                await user_tags.finish(response["message"])
-            await user_tags.finish(response["message"])
 
 
 group_list = on_command("#群列表", priority=5, block=True)

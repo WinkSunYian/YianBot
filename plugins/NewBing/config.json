@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-  "commands": {
-    "#NewBing": "指令用法:\n#NewBing [问题]\n指令别名:\n#nb"
-  }
-}

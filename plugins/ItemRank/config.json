@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-  "commands": {
-    "#斗牛": "指令用法:\n#斗牛 [金额]"
-  }
-}
