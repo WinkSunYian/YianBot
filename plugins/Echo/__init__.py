@@ -5,10 +5,10 @@ from nonebot.adapters.onebot.v11 import (
     Message,
 )
 from nonebot.params import CommandArg
-from YianBot.configs.Config import MASTER
+from configs.Config import MASTER
 
-__plugin_name__ = 'ChatAI'
-__plugin_usage__ = 'Echo'
+__plugin_name__ = "ChatAI"
+__plugin_usage__ = "Echo"
 
 
 echo = on_command("#echo", priority=5, block=True)
