@@ -1,5 +1,9 @@
-from nonebot import on_request
-from nonebot.adapters.onebot.v11 import Bot, FriendRequestEvent, GroupRequestEvent
+from nonebot import on_request, on_message
+from nonebot.adapters.onebot.v11 import (
+    Bot,
+    FriendRequestEvent,
+    GroupRequestEvent,
+)
 from utils.utils import DailyCountLimiter
 from configs.Config import MASTER
 import asyncio
@@ -10,7 +14,7 @@ count = DailyCountLimiter(5)
 __plugin_name__ = "SetRequest"
 __plugin_usage__ = "处理请求"
 
-friend = on_request(priority=6, block=True)
+friend = on_request(priority=6, block=False)
 
 
 @friend.handle()
@@ -33,12 +37,14 @@ async def friend_handle(bot: Bot, event: FriendRequestEvent):
         )
 
 
-group = on_request(priority=6, block=True)
+group = on_request(priority=6, block=False)
 
 
 @group.handle()
 async def group_handle(bot: Bot, event: GroupRequestEvent):
+    print("---------------")
     print(event.sub_type)
+    print("---------------")
     if event.sub_type == "invite":
         await bot.send_msg(
             message_type="private",

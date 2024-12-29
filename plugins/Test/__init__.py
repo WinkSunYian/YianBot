@@ -6,11 +6,7 @@ from nonebot.adapters.onebot.v11 import (
     PrivateMessageEvent,
 )
 
-from utils.utils import (
-    DailyCountLimiter,
-    BackpackControl
-)
-from utils.db_utils import UserBackpackManager
+from utils.utils import DailyCountLimiter, BackpackControl
 
 from random import choice
 
@@ -19,4 +15,5 @@ signin = on_fullmatch("#test", priority=6, block=True)
 
 @signin.handle()
 async def _(event: GroupMessageEvent):
-    await signin.finish(MessageSegment.share("baidu.com") + "1")
+    path = "data/oxygen_card/fieldset_screenshot.png"
+    await signin.finish(MessageSegment.image(path))
