@@ -16,4 +16,4 @@ signin = on_fullmatch("#test", priority=6, block=True)
 @signin.handle()
 async def _(event: GroupMessageEvent):
     path = Path("/data/YianBot/data/oxygen_card/fieldset_screenshot.png")
-    await signin.finish(MessageSegment.imagestr((path)))
+    await signin.finish(MessageSegment.image(str(path)))
