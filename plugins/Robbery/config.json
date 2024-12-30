@@ -1,7 +1,0 @@
-{
-  "plugin": "enable",
-  "disableReason": "",
-    "commands": {
-    "打劫": "指令用法:\n打劫 [QQ]"
-  }
-}

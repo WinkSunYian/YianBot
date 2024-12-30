@@ -4,13 +4,9 @@ from nonebot.params import CommandArg, Depends
 from .data_source import get_oxygen_card
 from utils.utils import UserBlockLimiter
 from dependencies.get_args_list import get_args_list
-import json
-
 
 user_block_limiter = UserBlockLimiter()
 
-with open("/data/YianBot/data/缺氧数据库.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
 
 qy = on_command("#缺氧", aliases={"缺氧"}, priority=6, block=True)
 
@@ -22,14 +18,14 @@ async def _(
     args_list: list = Depends(get_args_list),
 ):
     if len(args_list) == 0:
-        pass
+        return
     name = args_list[0]
-    if name not in data:
-        pass
     if user_block_limiter.check(event.user_id):
-        pass
+        return
 
-    path = await get_oxygen_card(name, data[name])
+    path = await get_oxygen_card(name)
+    if not path:
+        return
     with open(path, "rb") as f:
         image_bytes = f.read()
     user_block_limiter.set_false(event.user_id)
