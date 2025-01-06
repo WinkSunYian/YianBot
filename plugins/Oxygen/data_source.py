@@ -42,7 +42,7 @@ async def get_oxygen_card(name: str) -> str:
         element = page.locator("div.layui-col-md4")
 
         # 截图目标元素
-        screenshot_path = "container_screenshot.png"
+        screenshot_path = "/data/YianBot/data/oxygen_card/" + name + ".png"
         await element.screenshot(path=screenshot_path)
 
         # 关闭浏览器
