@@ -13,3 +13,8 @@ async def get_user_tags_or_create_user(user_id: int) -> list:
         status, response = await http_client.post(f"/users/{user_id}")
         return []
     return response["data"]
+
+    
+    """"
+    404 {'error': 'Request failed with status 404'}
+    """
