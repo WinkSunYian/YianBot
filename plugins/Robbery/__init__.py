@@ -48,7 +48,7 @@ async def _(
                 f"/users/{event.user_id}/robbery", json={"target_id": str(args_list[0])}
             )
             await robbery.finish(
-                MessageSegment.reply(event.message_id) + response["msg"]
+                MessageSegment.reply(event.message_id) + response["message"]
             )
         else:
             await robbery.finish(
