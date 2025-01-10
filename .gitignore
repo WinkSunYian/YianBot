@@ -8,5 +8,3 @@ build/
 node_modules/
 venv/
 src/
-bot.spec
-package-lock.json
