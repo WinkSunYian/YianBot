@@ -8,7 +8,6 @@ async def get_user_tags(event: MessageEvent) -> list:
 
 async def get_user_tags_or_create_user(user_id: int) -> list:
     status, response = await http_client.get(f"/users/{user_id}/tags")
-    print(status, response)
     if response["status_code"] == 404:
         status, response = await http_client.post(f"/users/{user_id}")
         return []

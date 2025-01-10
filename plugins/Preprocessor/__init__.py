@@ -20,3 +20,5 @@ count = DailyCountLimiter(1)
 async def _(event: MessageEvent, state: T_State):
     if event.is_tome():
         tag_list = await get_user_tags_or_create_user(event.user_id)
+        if "黑名单" in tag_list:
+            raise IgnoredException("黑名单用户禁止使用")
