@@ -6,10 +6,12 @@ from nonebot.adapters.onebot.v11 import (
     MessageSegment,
     GroupMessageEvent,
 )
-from nonebot.params import CommandArg
+from nonebot.params import CommandArg, Depends
 import time
 import os
 from utils.utils import args_split, ConfigReader
+from utils.http_utils import http_client
+from dependencies import get_args_list
 from configs.Config import MASTER
 
 __plugin_name__ = "Master"
@@ -53,6 +55,23 @@ async def info_handle(bot: Bot, event: GroupMessageEvent, args: Message = Comman
         )
         msg = f"nickname:{data['nickname']}\nuser_id{data['user_id']}\nrole:{data['role']}\nlever:{data['level']}\njoin_time:{time.strftime('%Y-%m-%d %H:%M.%S', time.localtime(data['join_time']))}"
         await info.finish(MessageSegment.reply(event.user_id) + msg)
+
+
+tag = on_command("#tag", block=True)
+
+
+@tag.handle()
+async def _(bot: Bot, event: GroupMessageEvent, args_list=Depends(get_args_list)):
+    if event.user_id == MASTER:
+        
+        status, response = await http_client.post(
+            f"/users/{args_list[0]}/tags",
+            json={"name": args_list[1], "expiry_date": args_list[2]},
+        )
+        if status == 201:
+            await tag.finish(f"添加标签成功")
+        else:
+            await tag.finish(f"添加标签失败，{response}")
 
 
 plugin_list = on_command("#插件", aliases={"/插件"}, block=True)

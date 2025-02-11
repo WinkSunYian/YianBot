@@ -4,6 +4,19 @@ import re
 from random import choice
 
 
+def to_messages(data: dict):
+    messages = []
+    for message in data["messages"]:
+        raw_message = (
+            message["raw_message"].replace("[CQ:at,qq=1012896426]", "@逸安").strip()
+        )
+        if message["user_id"] == message["self_id"]:
+            messages.append({"role": "assistant", "content": raw_message})
+        else:
+            messages.append({"role": "user", "content": raw_message})
+    return messages
+
+
 async def getChat(inputText, user_id, at=False):
     # 复读
     if len(inputText) == 1 and at:
@@ -38,8 +51,10 @@ async def getDictionaryChat(inputText, at=False):
     return None
 
 
-async def getChatGPT(inputText, user_id):
-    data = {"message": inputText}
-    status, response = await http_client.post(f"/users/{user_id}/chat-ai", json=data)
-    response = response["data"]["chat"]
+async def getChatAIresponse(result, user_id):
+    data = to_messages(result)
+    status, response = await http_client.post(
+        f"/users/{user_id}/chat-ai", json={"messages": data}
+    )
+    response = response["data"]["response"]
     return response
